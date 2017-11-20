@@ -127,7 +127,12 @@
             dataType: 'html',
             success: function(data, status, xhr){
                 $(vipspa.mainView).html(data);
-                loadScript(routerItem.controller);
+                
+                //修改成数组就可以加载多个js文件了，同时config页面的controller也要改成数组形式的数据
+                routerItem.controller.forEach(function(item){
+                    loadScript(item);
+                });
+                //loadScript(routerItem.controller);
             },
             error: function(xhr, errorType, error){
                 if($(vipspa.errorTemplateId).length===0){
